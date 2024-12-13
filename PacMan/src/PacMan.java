@@ -73,7 +73,7 @@ public class PacMan extends JPanel {
 
     HashSet<Block> walls;
     HashSet<Block> foods;
-    HashSet<Block> ghost;
+    HashSet<Block> ghosts;
     Block pacman;
 
 
@@ -99,7 +99,7 @@ public class PacMan extends JPanel {
     public void loadMap() {
         walls = new HashSet<Block>();
         foods = new HashSet<Block>();
-        ghost = new HashSet<Block>();
+        ghosts = new HashSet<Block>();
 
         for (int r = 0; r< rowCount; r++){
             for (int c = 0; c < columnCount; c++){
@@ -115,19 +115,19 @@ public class PacMan extends JPanel {
                 }
                 else if(tileMapChar == 'b'){
                     Block blueghost = new Block(blueGhostImage, x, y, tileSize, tileSize);
-                    ghost.add(blueghost);
+                    ghosts.add(blueghost);
                 }
                 else if(tileMapChar == 'r'){
                     Block redghost = new Block(redGhostImage, x, y, tileSize, tileSize);
-                    ghost.add(redghost);
+                    ghosts.add(redghost);
                 }
                 else if(tileMapChar == 'p'){
                     Block pinkghost = new Block(pinkGhostImage, x, y, tileSize, tileSize);
-                    ghost.add(pinkghost);
+                    ghosts.add(pinkghost);
                 }
                 else if(tileMapChar == 'o'){
                     Block orangeghost = new Block(orangeGhostImage, x, y, tileSize, tileSize);
-                    ghost.add(orangeghost);
+                    ghosts.add(orangeghost);
                 }
                 else if(tileMapChar == 'P'){
                     pacman = new Block(pacmanRightImage, x, y, tileSize, tileSize);
@@ -147,6 +147,18 @@ public class PacMan extends JPanel {
 
     public void draw(Graphics g){
         g.drawImage(pacman.image, pacman.x, pacman.y, pacman.width, pacman.height, null);
+
+        for (Block ghost : ghosts){
+            g.drawImage(ghost.image, ghost.x, ghost.y, ghost.width, ghost.height, null);
+        }
+        for (Block wall : walls){
+            g.drawImage(wall.image, wall.x, wall.y, wall.width, wall.height, null);
+        }
+        g.setColor(Color.WHITE);
+        for (Block food : foods){
+            g.fillRect(food.x, food.y, food.width, food.height);
+        }
+
     }
 
 
